@@ -1,0 +1,3 @@
+/home/formation/Documents/chess_opengl/build/CMakeFiles/ChessGame.dir
+/home/formation/Documents/chess_opengl/build/CMakeFiles/edit_cache.dir
+/home/formation/Documents/chess_opengl/build/CMakeFiles/rebuild_cache.dir
