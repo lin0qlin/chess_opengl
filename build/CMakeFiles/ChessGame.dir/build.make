@@ -125,33 +125,33 @@ CMakeFiles/ChessGame.dir/shader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ChessGame.dir/shader.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/formation/Documents/chess_opengl/shader.cpp -o CMakeFiles/ChessGame.dir/shader.cpp.s
 
-CMakeFiles/ChessGame.dir/texture.cpp.o: CMakeFiles/ChessGame.dir/flags.make
-CMakeFiles/ChessGame.dir/texture.cpp.o: ../texture.cpp
-CMakeFiles/ChessGame.dir/texture.cpp.o: CMakeFiles/ChessGame.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/formation/Documents/chess_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ChessGame.dir/texture.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ChessGame.dir/texture.cpp.o -MF CMakeFiles/ChessGame.dir/texture.cpp.o.d -o CMakeFiles/ChessGame.dir/texture.cpp.o -c /home/formation/Documents/chess_opengl/texture.cpp
+CMakeFiles/ChessGame.dir/camera.cpp.o: CMakeFiles/ChessGame.dir/flags.make
+CMakeFiles/ChessGame.dir/camera.cpp.o: ../camera.cpp
+CMakeFiles/ChessGame.dir/camera.cpp.o: CMakeFiles/ChessGame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/formation/Documents/chess_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ChessGame.dir/camera.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ChessGame.dir/camera.cpp.o -MF CMakeFiles/ChessGame.dir/camera.cpp.o.d -o CMakeFiles/ChessGame.dir/camera.cpp.o -c /home/formation/Documents/chess_opengl/camera.cpp
 
-CMakeFiles/ChessGame.dir/texture.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ChessGame.dir/texture.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/formation/Documents/chess_opengl/texture.cpp > CMakeFiles/ChessGame.dir/texture.cpp.i
+CMakeFiles/ChessGame.dir/camera.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ChessGame.dir/camera.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/formation/Documents/chess_opengl/camera.cpp > CMakeFiles/ChessGame.dir/camera.cpp.i
 
-CMakeFiles/ChessGame.dir/texture.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ChessGame.dir/texture.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/formation/Documents/chess_opengl/texture.cpp -o CMakeFiles/ChessGame.dir/texture.cpp.s
+CMakeFiles/ChessGame.dir/camera.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ChessGame.dir/camera.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/formation/Documents/chess_opengl/camera.cpp -o CMakeFiles/ChessGame.dir/camera.cpp.s
 
-CMakeFiles/ChessGame.dir/ressources/stb_image/stb_image.cpp.o: CMakeFiles/ChessGame.dir/flags.make
-CMakeFiles/ChessGame.dir/ressources/stb_image/stb_image.cpp.o: ../ressources/stb_image/stb_image.cpp
-CMakeFiles/ChessGame.dir/ressources/stb_image/stb_image.cpp.o: CMakeFiles/ChessGame.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/formation/Documents/chess_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/ChessGame.dir/ressources/stb_image/stb_image.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ChessGame.dir/ressources/stb_image/stb_image.cpp.o -MF CMakeFiles/ChessGame.dir/ressources/stb_image/stb_image.cpp.o.d -o CMakeFiles/ChessGame.dir/ressources/stb_image/stb_image.cpp.o -c /home/formation/Documents/chess_opengl/ressources/stb_image/stb_image.cpp
+CMakeFiles/ChessGame.dir/control.cpp.o: CMakeFiles/ChessGame.dir/flags.make
+CMakeFiles/ChessGame.dir/control.cpp.o: ../control.cpp
+CMakeFiles/ChessGame.dir/control.cpp.o: CMakeFiles/ChessGame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/formation/Documents/chess_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/ChessGame.dir/control.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ChessGame.dir/control.cpp.o -MF CMakeFiles/ChessGame.dir/control.cpp.o.d -o CMakeFiles/ChessGame.dir/control.cpp.o -c /home/formation/Documents/chess_opengl/control.cpp
 
-CMakeFiles/ChessGame.dir/ressources/stb_image/stb_image.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ChessGame.dir/ressources/stb_image/stb_image.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/formation/Documents/chess_opengl/ressources/stb_image/stb_image.cpp > CMakeFiles/ChessGame.dir/ressources/stb_image/stb_image.cpp.i
+CMakeFiles/ChessGame.dir/control.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ChessGame.dir/control.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/formation/Documents/chess_opengl/control.cpp > CMakeFiles/ChessGame.dir/control.cpp.i
 
-CMakeFiles/ChessGame.dir/ressources/stb_image/stb_image.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ChessGame.dir/ressources/stb_image/stb_image.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/formation/Documents/chess_opengl/ressources/stb_image/stb_image.cpp -o CMakeFiles/ChessGame.dir/ressources/stb_image/stb_image.cpp.s
+CMakeFiles/ChessGame.dir/control.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ChessGame.dir/control.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/formation/Documents/chess_opengl/control.cpp -o CMakeFiles/ChessGame.dir/control.cpp.s
 
 # Object files for target ChessGame
 ChessGame_OBJECTS = \
@@ -159,8 +159,8 @@ ChessGame_OBJECTS = \
 "CMakeFiles/ChessGame.dir/object.cpp.o" \
 "CMakeFiles/ChessGame.dir/renderer.cpp.o" \
 "CMakeFiles/ChessGame.dir/shader.cpp.o" \
-"CMakeFiles/ChessGame.dir/texture.cpp.o" \
-"CMakeFiles/ChessGame.dir/ressources/stb_image/stb_image.cpp.o"
+"CMakeFiles/ChessGame.dir/camera.cpp.o" \
+"CMakeFiles/ChessGame.dir/control.cpp.o"
 
 # External object files for target ChessGame
 ChessGame_EXTERNAL_OBJECTS =
@@ -169,8 +169,8 @@ ChessGame: CMakeFiles/ChessGame.dir/main.cpp.o
 ChessGame: CMakeFiles/ChessGame.dir/object.cpp.o
 ChessGame: CMakeFiles/ChessGame.dir/renderer.cpp.o
 ChessGame: CMakeFiles/ChessGame.dir/shader.cpp.o
-ChessGame: CMakeFiles/ChessGame.dir/texture.cpp.o
-ChessGame: CMakeFiles/ChessGame.dir/ressources/stb_image/stb_image.cpp.o
+ChessGame: CMakeFiles/ChessGame.dir/camera.cpp.o
+ChessGame: CMakeFiles/ChessGame.dir/control.cpp.o
 ChessGame: CMakeFiles/ChessGame.dir/build.make
 ChessGame: /usr/lib/x86_64-linux-gnu/libOpenGL.so
 ChessGame: /usr/lib/x86_64-linux-gnu/libGLX.so
@@ -180,7 +180,6 @@ ChessGame: CMakeFiles/ChessGame.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/formation/Documents/chess_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable ChessGame"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ChessGame.dir/link.txt --verbose=$(VERBOSE)
 	/usr/bin/cmake -E copy_directory /home/formation/Documents/chess_opengl/models /home/formation/Documents/chess_opengl/build/models
-	/usr/bin/cmake -E copy_directory /home/formation/Documents/chess_opengl/textures /home/formation/Documents/chess_opengl/build/textures
 
 # Rule to build all files generated by this target.
 CMakeFiles/ChessGame.dir/build: ChessGame

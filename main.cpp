@@ -1,20 +1,22 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "renderer.h"
-#include "shader.h"
 #include <vector>
 #include <ctime>
+#include "renderer.h"
+#include "shader.h"
+#include "camera.h"
+#include "control.h"
 
 ChessBoard chessBoard;
 std::vector<ChessPiece> chessPieces;
 bool isWhiteTurn = true;
+
+Camera camera(glm::vec3(4.0f, 10.0f, 20.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
+Control control(camera);
 Renderer renderer;
 
 void setupOpenGL() {
     glEnable(GL_DEPTH_TEST); // 启用深度测试
-//    glEnable(GL_LIGHTING);
-//    glEnable(GL_LIGHT0);
-
 
     // 设置投影矩阵为正交投影
     glMatrixMode(GL_PROJECTION);
@@ -26,7 +28,7 @@ void setupOpenGL() {
     gluLookAt(4.0, 10.0, 20.0,  // 相机位置 (x, y, z)
               4.0, 0.0, 0.0,   // 相机观察点 (中心位置)
               0.0, 1.0, 0.0);  // 相机的向上向量
-    glClearColor(0.1f, 0.1f, 0.1f, 0.1f); // 深灰色背景
+    glClearColor(0.0f, 0.0f, 0.3f, 0.1f); // 深灰色背景
 }
 
 
@@ -133,11 +135,32 @@ void gameLoop(GLFWwindow* window) {
 }
 */
 
+void gameLoop(GLFWwindow* window) {
+    static float lastTime = 0.0f;
+    float currentTime = glfwGetTime();
+    float deltaTime = currentTime - lastTime;
+    lastTime = currentTime;
+
+    // 处理用户输入
+    control.processInput(window, deltaTime);
+    control.processMouse(window);
+
+    // 清除缓冲区
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    // 渲染场景
+    renderer.render(chessBoard, chessPieces, camera.getViewMatrix());
+
+    glfwSwapBuffers(window);
+}
+
+
 void render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    renderer.render(chessBoard, chessPieces);
+    renderer.render(chessBoard, chessPieces, camera.getViewMatrix());
     glfwSwapBuffers(glfwGetCurrentContext());
 }
+
 
 int main() {
     // 初始化 GLFW
@@ -155,12 +178,15 @@ int main() {
     setupOpenGL();  // 设置 OpenGL 状态
     initializeGame(); // 初始化棋盘和棋子
     srand(static_cast<unsigned int>(time(0))); // 初始化随机数种子
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+
+    // 时间变量
+    float lastFrameTime = 0.0f;
 
     // 主循环
     while (!glfwWindowShouldClose(window)) {
-//        gameLoop(window); // 处理用户输入和游戏逻辑
-        render();         // 渲染棋盘和棋子
-        glfwPollEvents(); // 处理窗口事件
+        gameLoop(window); // 处理用户输入和游戏逻辑
+        glfwPollEvents();           // 处理窗口事件
     }
 
     // 清理
@@ -168,3 +194,34 @@ int main() {
     glfwTerminate();
     return 0;
 }
+
+
+//int main() {
+//    // 初始化 GLFW
+//    if (!glfwInit()) return -1;
+
+//    GLFWwindow* window = glfwCreateWindow(800, 800, "Chess Game", nullptr, nullptr);
+//    if (!window) {
+//        glfwTerminate();
+//        return -1;
+//    }
+
+//    glfwMakeContextCurrent(window);
+//    glewInit();
+
+//    setupOpenGL();  // 设置 OpenGL 状态
+//    initializeGame(); // 初始化棋盘和棋子
+//    srand(static_cast<unsigned int>(time(0))); // 初始化随机数种子
+
+//    // 主循环
+//    while (!glfwWindowShouldClose(window)) {
+////        gameLoop(window); // 处理用户输入和游戏逻辑
+//        render();         // 渲染棋盘和棋子
+//        glfwPollEvents(); // 处理窗口事件
+//    }
+
+//    // 清理
+//    glfwDestroyWindow(window);
+//    glfwTerminate();
+//    return 0;
+//}

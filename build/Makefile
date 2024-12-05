@@ -129,6 +129,54 @@ ChessGame/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChessGame.dir/build.make CMakeFiles/ChessGame.dir/build
 .PHONY : ChessGame/fast
 
+camera.o: camera.cpp.o
+.PHONY : camera.o
+
+# target to build an object file
+camera.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChessGame.dir/build.make CMakeFiles/ChessGame.dir/camera.cpp.o
+.PHONY : camera.cpp.o
+
+camera.i: camera.cpp.i
+.PHONY : camera.i
+
+# target to preprocess a source file
+camera.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChessGame.dir/build.make CMakeFiles/ChessGame.dir/camera.cpp.i
+.PHONY : camera.cpp.i
+
+camera.s: camera.cpp.s
+.PHONY : camera.s
+
+# target to generate assembly for a file
+camera.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChessGame.dir/build.make CMakeFiles/ChessGame.dir/camera.cpp.s
+.PHONY : camera.cpp.s
+
+control.o: control.cpp.o
+.PHONY : control.o
+
+# target to build an object file
+control.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChessGame.dir/build.make CMakeFiles/ChessGame.dir/control.cpp.o
+.PHONY : control.cpp.o
+
+control.i: control.cpp.i
+.PHONY : control.i
+
+# target to preprocess a source file
+control.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChessGame.dir/build.make CMakeFiles/ChessGame.dir/control.cpp.i
+.PHONY : control.cpp.i
+
+control.s: control.cpp.s
+.PHONY : control.s
+
+# target to generate assembly for a file
+control.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChessGame.dir/build.make CMakeFiles/ChessGame.dir/control.cpp.s
+.PHONY : control.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -201,30 +249,6 @@ renderer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChessGame.dir/build.make CMakeFiles/ChessGame.dir/renderer.cpp.s
 .PHONY : renderer.cpp.s
 
-ressources/stb_image/stb_image.o: ressources/stb_image/stb_image.cpp.o
-.PHONY : ressources/stb_image/stb_image.o
-
-# target to build an object file
-ressources/stb_image/stb_image.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChessGame.dir/build.make CMakeFiles/ChessGame.dir/ressources/stb_image/stb_image.cpp.o
-.PHONY : ressources/stb_image/stb_image.cpp.o
-
-ressources/stb_image/stb_image.i: ressources/stb_image/stb_image.cpp.i
-.PHONY : ressources/stb_image/stb_image.i
-
-# target to preprocess a source file
-ressources/stb_image/stb_image.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChessGame.dir/build.make CMakeFiles/ChessGame.dir/ressources/stb_image/stb_image.cpp.i
-.PHONY : ressources/stb_image/stb_image.cpp.i
-
-ressources/stb_image/stb_image.s: ressources/stb_image/stb_image.cpp.s
-.PHONY : ressources/stb_image/stb_image.s
-
-# target to generate assembly for a file
-ressources/stb_image/stb_image.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChessGame.dir/build.make CMakeFiles/ChessGame.dir/ressources/stb_image/stb_image.cpp.s
-.PHONY : ressources/stb_image/stb_image.cpp.s
-
 shader.o: shader.cpp.o
 .PHONY : shader.o
 
@@ -249,30 +273,6 @@ shader.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChessGame.dir/build.make CMakeFiles/ChessGame.dir/shader.cpp.s
 .PHONY : shader.cpp.s
 
-texture.o: texture.cpp.o
-.PHONY : texture.o
-
-# target to build an object file
-texture.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChessGame.dir/build.make CMakeFiles/ChessGame.dir/texture.cpp.o
-.PHONY : texture.cpp.o
-
-texture.i: texture.cpp.i
-.PHONY : texture.i
-
-# target to preprocess a source file
-texture.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChessGame.dir/build.make CMakeFiles/ChessGame.dir/texture.cpp.i
-.PHONY : texture.cpp.i
-
-texture.s: texture.cpp.s
-.PHONY : texture.s
-
-# target to generate assembly for a file
-texture.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ChessGame.dir/build.make CMakeFiles/ChessGame.dir/texture.cpp.s
-.PHONY : texture.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -282,6 +282,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... ChessGame"
+	@echo "... camera.o"
+	@echo "... camera.i"
+	@echo "... camera.s"
+	@echo "... control.o"
+	@echo "... control.i"
+	@echo "... control.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
@@ -291,15 +297,9 @@ help:
 	@echo "... renderer.o"
 	@echo "... renderer.i"
 	@echo "... renderer.s"
-	@echo "... ressources/stb_image/stb_image.o"
-	@echo "... ressources/stb_image/stb_image.i"
-	@echo "... ressources/stb_image/stb_image.s"
 	@echo "... shader.o"
 	@echo "... shader.i"
 	@echo "... shader.s"
-	@echo "... texture.o"
-	@echo "... texture.i"
-	@echo "... texture.s"
 .PHONY : help
 
 

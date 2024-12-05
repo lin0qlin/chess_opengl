@@ -5,7 +5,9 @@
 #include <vector>
 #include <GL/glew.h>
 #include <iostream>
+
 #include <signal.h>
+#include "shader.h"
 
 #define ASSERT(x) if (!(x)) raise(SIGTRAP);
 #define GLCall(x) GLClearError();\
@@ -20,7 +22,7 @@ bool GLLogCall(const char* function, const char* file, int line);
 class Renderer {
 public:
     Renderer();
-    void render(const ChessBoard& board, const std::vector<ChessPiece>& pieces);
+    void render(const ChessBoard& board, const std::vector<ChessPiece>& pieces, const glm::mat4& viewMatrix);
     void Clear() const;
 };
 

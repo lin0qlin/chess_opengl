@@ -7,9 +7,9 @@ class Shader {
 public:
     Shader(const std::string& vertexPath, const std::string& fragmentPath);
     void use();
+    unsigned int programID;
 
 private:
-    unsigned int programID;
     unsigned int loadShader(const std::string& path, unsigned int type);
 };
 

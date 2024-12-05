@@ -93,6 +93,8 @@ set(SOURCES
     object.cpp
     renderer.cpp
     shader.cpp
+    camera.cpp
+    control.cpp
 )
 
 # 添加可执行文件
@@ -103,6 +105,8 @@ target_sources(ChessGame PRIVATE
     object.h
     renderer.h
     shader.h
+    camera.h
+    control.h
 )
 
 # 链接库

@@ -1,12 +1,11 @@
 #version 330 core
+in vec3 fragNormal;
+in vec3 fragPosition;
 
-in vec2 UV;
+out vec4 FragColor;
 
-uniform sampler2D myTextureSampler;
-
-out vec3 color;
-
-void main(){
-    color = texture(myTextureSampler,UV).rgb;
-
+void main() {
+    vec3 color = fragNormal * 0.5 + 0.5;
+    FragColor = vec4(color, 1.0);
 }
+
