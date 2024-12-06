@@ -1,32 +1,38 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "renderer.h"
-#include "shader.h"
 #include <vector>
 #include <ctime>
+#include "renderer.h"
+#include "shader.h"
+#include "camera.h"
+#include "navigationcontrols.h"
+
 
 ChessBoard chessBoard;
 std::vector<ChessPiece> chessPieces;
 bool isWhiteTurn = true;
 Renderer renderer;
+Camera* camera;
+NavigationControls* controls;
 
 void setupOpenGL() {
     glEnable(GL_DEPTH_TEST); // 启用深度测试
+    glClearColor(0.0f, 0.0f, 0.3f, 0.1f); // background
 //    glEnable(GL_LIGHTING);
 //    glEnable(GL_LIGHT0);
 
 
-    // 设置投影矩阵为正交投影
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-//    gluOrtho2D(0.0, 8.0, 0.0, 8.0); // 设置为适合棋盘的范围（0-8）
-    gluPerspective(45.0, 1.0, 1.0, 100.0); // 透视投影 (45°视角, 宽高比为1, 近平面1, 远平面100)
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    gluLookAt(4.0, 10.0, 20.0,  // 相机位置 (x, y, z)
-              4.0, 0.0, 0.0,   // 相机观察点 (中心位置)
-              0.0, 1.0, 0.0);  // 相机的向上向量
-    glClearColor(0.1f, 0.1f, 0.1f, 0.1f); // 深灰色背景
+//     // 设置投影矩阵为正交投影
+//     glMatrixMode(GL_PROJECTION);
+//     glLoadIdentity();
+// //    gluOrtho2D(0.0, 8.0, 0.0, 8.0); // 设置为适合棋盘的范围（0-8）
+//     gluPerspective(45.0, 1.0, 1.0, 100.0); // 透视投影 (45°视角, 宽高比为1, 近平面1, 远平面100)
+//     glMatrixMode(GL_MODELVIEW);
+//     glLoadIdentity();
+//     gluLookAt(4.0, 10.0, 20.0,  // 相机位置 (x, y, z)
+//               4.0, 0.0, 0.0,   // 相机观察点 (中心位置)
+//               0.0, 1.0, 0.0);  // 相机的向上向量
+
 }
 
 
@@ -133,9 +139,17 @@ void gameLoop(GLFWwindow* window) {
 }
 */
 
+
+
+void initializeCamera(GLFWwindow* window, float width, float height) {
+    camera = new Camera(width, height);
+    controls = new NavigationControls(window, camera);
+}
+
+
 void render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    renderer.render(chessBoard, chessPieces);
+    renderer.render(chessBoard, chessPieces, camera->getViewMatrix(), camera->getProjectionMatrix());
     glfwSwapBuffers(glfwGetCurrentContext());
 }
 
@@ -154,16 +168,22 @@ int main() {
 
     setupOpenGL();  // 设置 OpenGL 状态
     initializeGame(); // 初始化棋盘和棋子
-    srand(static_cast<unsigned int>(time(0))); // 初始化随机数种子
+    initializeCamera(window, 800, 800); // 初始化摄像机
+    // srand(static_cast<unsigned int>(time(0))); // 初始化随机数种子
 
     // 主循环
     while (!glfwWindowShouldClose(window)) {
 //        gameLoop(window); // 处理用户输入和游戏逻辑
+        float deltaTime = 0.016f; // 简化的时间步长，实际可用时间函数计算
+        controls->update(deltaTime, nullptr); // 更新摄像机控制
         render();         // 渲染棋盘和棋子
+        glfwSwapBuffers(window); // 刷新窗口
         glfwPollEvents(); // 处理窗口事件
     }
 
     // 清理
+    delete camera;
+    delete controls;
     glfwDestroyWindow(window);
     glfwTerminate();
     return 0;
