@@ -9,26 +9,21 @@ ChessBoard chessBoard;
 std::vector<ChessPiece> chessPieces;
 bool isWhiteTurn = true;
 Renderer renderer;
+Shader* shader;
 
 void setupOpenGL() {
     glEnable(GL_DEPTH_TEST); // 启用深度测试
-//    glEnable(GL_LIGHTING);
-//    glEnable(GL_LIGHT0);
 
-
-    // 设置投影矩阵为正交投影
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-//    gluOrtho2D(0.0, 8.0, 0.0, 8.0); // 设置为适合棋盘的范围（0-8）
-    gluPerspective(45.0, 1.0, 1.0, 100.0); // 透视投影 (45°视角, 宽高比为1, 近平面1, 远平面100)
+    gluPerspective(45.0, 1.0, 1.0, 100.0); // 透视投影
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(4.0, 10.0, 20.0,  // 相机位置 (x, y, z)
-              4.0, 0.0, 0.0,   // 相机观察点 (中心位置)
-              0.0, 1.0, 0.0);  // 相机的向上向量
-    glClearColor(0.1f, 0.1f, 0.1f, 0.1f); // 深灰色背景
+    gluLookAt(4.0, 8.0, 17.0,  // 相机位置
+              4.0, 0.0, 0.0,   // 观察点
+              0.0, 1.0, 0.0);  // 向上向量
+    glClearColor(0.0f, 0.0f, 0.3f, 0.1f); // background blue foncé
 }
-
 
 void initializeGame() {
     // 清空棋盘状态
@@ -139,6 +134,12 @@ void render() {
     glfwSwapBuffers(glfwGetCurrentContext());
 }
 
+void initializeShaders() {
+    // 初始化着色器
+    shader = new Shader("SimpleVertexShader.vertexshader", "SimpleFragmentShader.fragmentshader");
+    shader->use(); // 启用着色器
+}
+
 int main() {
     // 初始化 GLFW
     if (!glfwInit()) return -1;
@@ -152,18 +153,18 @@ int main() {
     glfwMakeContextCurrent(window);
     glewInit();
 
-    setupOpenGL();  // 设置 OpenGL 状态
-    initializeGame(); // 初始化棋盘和棋子
-    srand(static_cast<unsigned int>(time(0))); // 初始化随机数种子
+    setupOpenGL();       // 设置 OpenGL 状态
+    initializeShaders(); // 初始化着色器
+    initializeGame();    // 初始化棋盘和棋子
 
     // 主循环
     while (!glfwWindowShouldClose(window)) {
-//        gameLoop(window); // 处理用户输入和游戏逻辑
-        render();         // 渲染棋盘和棋子
+        render();
         glfwPollEvents(); // 处理窗口事件
     }
 
     // 清理
+    delete shader;
     glfwDestroyWindow(window);
     glfwTerminate();
     return 0;
