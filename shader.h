@@ -9,7 +9,7 @@
 class Shader {
 public:
     Shader(const std::string& vertexPath, const std::string& fragmentPath);
-    void use();
+    void use() const;
     unsigned int programID;
 
     ~Shader();
@@ -18,6 +18,8 @@ public:
     void Unbind() const;
 
     void setUniform3fv(const std::string& name, const glm::vec3 vector);
+    void setUniformMat4(const std::string& name, const glm::mat4& matrix) const;
+
 
 private:
     unsigned int loadShader(const std::string& path, unsigned int type);

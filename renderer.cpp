@@ -25,15 +25,17 @@ void Renderer::render(const ChessBoard& board, const std::vector<ChessPiece>& pi
     shader.use();
 
     // Set view and projection matrices
-    unsigned int viewLoc = glGetUniformLocation(shader.programID, "view");
-    unsigned int projLoc = glGetUniformLocation(shader.programID, "projection");
-    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &viewMatrix[0][0]);
-    glUniformMatrix4fv(projLoc, 1, GL_FALSE, &projectionMatrix[0][0]);
+//    unsigned int viewLoc = glGetUniformLocation(shader.programID, "view");
+//    unsigned int projLoc = glGetUniformLocation(shader.programID, "projection");
+//    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &viewMatrix[0][0]);
+//    glUniformMatrix4fv(projLoc, 1, GL_FALSE, &projectionMatrix[0][0]);
+    shader.setUniformMat4("view", viewMatrix);
+    shader.setUniformMat4("projection", projectionMatrix);
 
     // Render chessboard and pieces
     board.draw();
     for (const auto& piece : pieces) {
-        piece.draw();
+        piece.draw(shader);
     }
 }
 

@@ -3,6 +3,8 @@
 
 #include <glm/glm.hpp>
 #include <vector>
+#include "texture.h"
+#include "shader.h"
 
 
 class ChessBoard {
@@ -14,7 +16,7 @@ public:
     void removePiece(int x, int y);
 
 private:
-    int board[8][8]; // 棋盘状态
+    int board[8][8];
 };
 
 
@@ -29,10 +31,10 @@ public:
     enum PieceType { PAWN, ROOK, BISHOP, KNIGHT, QUEEN, KING };
 
     ChessPiece(PieceType type, bool isWhite, glm::vec3 position);
-    void draw() const;
+    void draw(const Shader& shader) const;
 //    void setPosition(glm::vec2 position);
 //    glm::vec2 getPosition() const;
-    bool isValidMove(const ChessBoard& board, glm::vec2 destination) const; // 检查合法移动
+    bool isValidMove(const ChessBoard& board, glm::vec2 destination) const;
     bool isWhite() const { return isWhite_; }
     PieceType getType() const { return type_; }
 
@@ -40,6 +42,7 @@ private:
     PieceType type_;
     bool isWhite_;
     glm::vec3 position_;
+    Texture* texture_;
     std::vector<glm::vec3> vertices_;
     std::vector<glm::vec2> uvs_;
     std::vector<glm::vec3> normals_;

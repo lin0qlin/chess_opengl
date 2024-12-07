@@ -32,7 +32,7 @@ Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath) {
     glDeleteShader(fragmentShader);
 }
 
-void Shader::use() {
+void Shader::use() const{
     glUseProgram(programID);
 }
 
@@ -69,4 +69,13 @@ void Shader::Unbind() const
 void Shader::setUniform3fv(const std::string &name, const glm::vec3 vector)
 {
     GLCall(glUniform3fv(GetUniformLocation(name),1, &vector[0]));
+}
+
+
+void Shader::setUniformMat4(const std::string& name, const glm::mat4& matrix) const {
+    unsigned int location = glGetUniformLocation(programID, name.c_str());
+    if (location == -1) {
+        std::cerr << "WARNING: Uniform '" << name << "' doesn't exist!" << std::endl;
+    }
+    glUniformMatrix4fv(location, 1, GL_FALSE, &matrix[0][0]);
 }

@@ -1,23 +1,26 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#include <GL/glew.h>
 #include <string>
 
-class Texture {
+
+class Texture
+{
+private:
+    unsigned int m_RendererID;
+    std::string m_FilePath;
+    unsigned char* m_LocalBuffer;
+    int m_Width, m_Height, m_BPP;
 public:
     Texture(const std::string& path);
     ~Texture();
 
-    void Bind(unsigned int slot = 0) const; // 绑定到指定的纹理槽
+    void Bind(unsigned int slot = 0) const;
     void Unbind() const;
 
-private:
-    GLuint m_RendererID; // OpenGL 纹理 ID
-    std::string m_FilePath; // 纹理文件路径
-    unsigned char* m_LocalBuffer; // 纹理数据
-    int m_Width, m_Height, m_BPP; // 宽度、高度、每像素位数
+    int GetWidth() const{ return m_Width; }
+
+    int GetHeight() const{ return m_Height; }
 };
 
 #endif // TEXTURE_H
-

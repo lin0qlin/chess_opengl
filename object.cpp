@@ -1,6 +1,6 @@
 #include "object.h"
 #include <GL/glew.h>
-//#include <glm/gtx/transform.hpp>
+#include <glm/gtx/transform.hpp>
 #include <iostream>
 #include <cstdio>
 #include <cstring>
@@ -38,7 +38,7 @@ void ChessBoard::draw() const {
             glColor3f(color.r, color.g, color.b);
 
             glPushMatrix();
-            glTranslatef(x, -thickness / 2, y); // 下沉一半厚度
+            glTranslatef(x, -thickness / 2, y);
 
             //top
             glBegin(GL_QUADS);
@@ -165,35 +165,41 @@ ChessPiece::ChessPiece(PieceType type, bool isWhite, glm::vec3 position)
     if (!Object::loadOBJ(filepath.c_str(), vertices_, uvs_, normals_)) {
         std::cerr << "Failed to load " << filepath << std::endl;
     }
+
+    if (isWhite_) {
+        texture_ = new Texture("textures/wood_light.jpg");
+    } else {
+        texture_ = new Texture("textures/wood_dark.png");
+    }
 }
 
-void ChessPiece::draw() const {
+void ChessPiece::draw(const Shader& shader) const {
     glPushMatrix();
     glTranslatef(position_.x, position_.y, position_.z);
 
     glScalef(0.5f, 0.5f, 0.5f);
 
-    // direction
-    glRotatef(180.0f, 0.0f, 1.0f, 0.0f); // for Y
-    glRotatef(-90.0f, 1.0f, 0.0f, 0.0f); // X
+    glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
+    glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);
 
-    // piece color
-     if (isWhite_) {
-         glColor3f(1.0f, 1.0f, 1.0f); // white
-     } else {
-         glColor3f(0.0f, 0.0f, 0.0f); // black
-     }
+
+    shader.use();
+    texture_->Bind();
+
+
+    glm::mat4 model = glm::translate(glm::mat4(1.0f), position_);
+    shader.setUniformMat4("model", model);
 
 
     glBegin(GL_TRIANGLES);
     for (size_t i = 0; i < vertices_.size(); i++) {
+        glTexCoord2f(uvs_[i].x, uvs_[i].y);
         glVertex3f(vertices_[i].x, vertices_[i].y, vertices_[i].z);
     }
     glEnd();
 
     glPopMatrix();
 }
-
 
 
 //void ChessPiece::setPosition(glm::vec2 position) {
@@ -206,32 +212,28 @@ void ChessPiece::draw() const {
 
 
 
-// 棋子的合法移动规则
+
 bool ChessPiece::isValidMove(const ChessBoard& board, glm::vec2 destination) const {
     int dx = destination.x - position_.x;
     int dy = destination.y - position_.y;
 
-    // 确保目标位置在棋盘范围内
     if (destination.x < 0 || destination.x >= 8 || destination.y < 0 || destination.y >= 8) {
         return false;
     }
 
     switch (type_) {
-        case PAWN: { // 兵的规则
+        case PAWN: {
             if (isWhite_) {
-                // 白兵只能向前，起始位置可以前进两格
                 if (dy == 1 && dx == 0 && board.getPiece(destination.x, destination.y) == 0) {
                     return true;
                 }
                 if (position_.y == 1 && dy == 2 && dx == 0 && board.getPiece(destination.x, destination.y) == 0) {
                     return board.getPiece(position_.x, position_.y + 1) == 0; // 确保路径无阻挡
                 }
-                // 斜向前进捕获敌方棋子
                 if (dy == 1 && abs(dx) == 1 && board.getPiece(destination.x, destination.y) != 0) {
                     return true;
                 }
             } else {
-                // 黑兵规则类似
                 if (dy == -1 && dx == 0 && board.getPiece(destination.x, destination.y) == 0) {
                     return true;
                 }
@@ -245,9 +247,8 @@ bool ChessPiece::isValidMove(const ChessBoard& board, glm::vec2 destination) con
             break;
         }
 
-        case ROOK: { // 车的规则
+        case ROOK: {
             if (dx == 0 || dy == 0) {
-                // 检查路径无阻挡
                 int stepX = (dx == 0) ? 0 : (dx > 0 ? 1 : -1);
                 int stepY = (dy == 0) ? 0 : (dy > 0 ? 1 : -1);
                 for (int i = 1; i < std::max(abs(dx), abs(dy)); ++i) {
@@ -260,8 +261,8 @@ bool ChessPiece::isValidMove(const ChessBoard& board, glm::vec2 destination) con
             break;
         }
 
-        case BISHOP: { // 主教的规则
-            if (abs(dx) == abs(dy)) { // 主教只能斜向移动
+        case BISHOP: {
+            if (abs(dx) == abs(dy)) {
                 int stepX = (dx > 0 ? 1 : -1);
                 int stepY = (dy > 0 ? 1 : -1);
                 for (int i = 1; i < abs(dx); ++i) {
@@ -274,17 +275,15 @@ bool ChessPiece::isValidMove(const ChessBoard& board, glm::vec2 destination) con
             break;
         }
 
-        case KNIGHT: { // 骑士的规则
-            // 骑士可以跳过其他棋子，移动 "L" 形
+        case KNIGHT: {
             if ((abs(dx) == 2 && abs(dy) == 1) || (abs(dx) == 1 && abs(dy) == 2)) {
                 return true;
             }
             break;
         }
 
-        case QUEEN: { // 后的规则
-            // 后的移动是车和主教规则的结合
-            if (dx == 0 || dy == 0) { // 水平或垂直移动
+        case QUEEN: {
+            if (dx == 0 || dy == 0) {
                 int stepX = (dx == 0) ? 0 : (dx > 0 ? 1 : -1);
                 int stepY = (dy == 0) ? 0 : (dy > 0 ? 1 : -1);
                 for (int i = 1; i < std::max(abs(dx), abs(dy)); ++i) {
@@ -294,7 +293,7 @@ bool ChessPiece::isValidMove(const ChessBoard& board, glm::vec2 destination) con
                 }
                 return true;
             }
-            if (abs(dx) == abs(dy)) { // 斜向移动
+            if (abs(dx) == abs(dy)) {
                 int stepX = (dx > 0 ? 1 : -1);
                 int stepY = (dy > 0 ? 1 : -1);
                 for (int i = 1; i < abs(dx); ++i) {
@@ -307,8 +306,7 @@ bool ChessPiece::isValidMove(const ChessBoard& board, glm::vec2 destination) con
             break;
         }
 
-        case KING: { // 王的规则
-            // 王只能移动一格（包括对角线）
+        case KING: {
             if (abs(dx) <= 1 && abs(dy) <= 1) {
                 return true;
             }
@@ -316,5 +314,5 @@ bool ChessPiece::isValidMove(const ChessBoard& board, glm::vec2 destination) con
         }
     }
 
-    return false; // 如果不符合任何规则，则非法
+    return false;
 }
