@@ -1,9 +1,11 @@
 #include "camera.h"
 #include "renderer.h"
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
-Camera::Camera(float width, float height) : position(4.0f, 5.0f, 10.0f), horizontalAngle(3.14), verticalAngle(-0.4), FoV(45)
-{
+
+Camera::Camera(float width, float height) : position(4.0f, 8.0f, 17.0f), horizontalAngle(3.14f), verticalAngle(-0.3f), FoV(45.0f) {
     computeMatrices(width, height);
 }
 

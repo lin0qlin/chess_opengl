@@ -5,11 +5,11 @@
 #include <cstdio>
 #include <cstring>
 
-// 初始化棋盘
+
 ChessBoard::ChessBoard() {
     for (int x = 0; x < 8; ++x) {
         for (int y = 0; y < 8; ++y) {
-            board[x][y] = 0; // 初始化为空
+            board[x][y] = 0;
         }
     }
 }
@@ -27,9 +27,9 @@ void ChessBoard::removePiece(int x, int y) {
 }
 
 
-// ChessBoard: 绘制8x8棋盘
+// ChessBoard
 void ChessBoard::draw() const {
-    float thickness = 0.2f; // 棋盘的厚度
+    float thickness = 0.2f;
 
     for (int x = 0; x < 8; ++x) {
         for (int y = 0; y < 8; ++y) {
@@ -40,7 +40,7 @@ void ChessBoard::draw() const {
             glPushMatrix();
             glTranslatef(x, -thickness / 2, y); // 下沉一半厚度
 
-            // 绘制顶部面
+            //top
             glBegin(GL_QUADS);
             glVertex3f(0, thickness / 2, 0);
             glVertex3f(1, thickness / 2, 0);
@@ -48,34 +48,34 @@ void ChessBoard::draw() const {
             glVertex3f(0, thickness / 2, 1);
             glEnd();
 
-            // 绘制四个侧面
+
             glBegin(GL_QUADS);
-            // 前面
+            // front
             glVertex3f(0, -thickness / 2, 1);
             glVertex3f(1, -thickness / 2, 1);
             glVertex3f(1, thickness / 2, 1);
             glVertex3f(0, thickness / 2, 1);
 
-            // 后面
+            // back
             glVertex3f(0, -thickness / 2, 0);
             glVertex3f(1, -thickness / 2, 0);
             glVertex3f(1, thickness / 2, 0);
             glVertex3f(0, thickness / 2, 0);
 
-            // 左面
+            // left
             glVertex3f(0, -thickness / 2, 0);
             glVertex3f(0, -thickness / 2, 1);
             glVertex3f(0, thickness / 2, 1);
             glVertex3f(0, thickness / 2, 0);
 
-            // 右面
+            // right
             glVertex3f(1, -thickness / 2, 0);
             glVertex3f(1, -thickness / 2, 1);
             glVertex3f(1, thickness / 2, 1);
             glVertex3f(1, thickness / 2, 0);
             glEnd();
 
-            // 绘制底部面
+            // bottom
             glBegin(GL_QUADS);
             glVertex3f(0, -thickness / 2, 0);
             glVertex3f(1, -thickness / 2, 0);
@@ -169,19 +169,19 @@ ChessPiece::ChessPiece(PieceType type, bool isWhite, glm::vec3 position)
 
 void ChessPiece::draw() const {
     glPushMatrix();
-    glTranslatef(position_.x, position_.y, position_.z); // 平移到棋盘上的对应位置
+    glTranslatef(position_.x, position_.y, position_.z);
 
     glScalef(0.5f, 0.5f, 0.5f);
 
-    // 调整模型方向
-    glRotatef(180.0f, 0.0f, 1.0f, 0.0f); // 绕 Y 轴旋转
-    glRotatef(-90.0f, 1.0f, 0.0f, 0.0f); // 绕 X 轴旋转
+    // direction
+    glRotatef(180.0f, 0.0f, 1.0f, 0.0f); // for Y
+    glRotatef(-90.0f, 1.0f, 0.0f, 0.0f); // X
 
-    // 设置棋子颜色
+    // piece color
      if (isWhite_) {
-         glColor3f(1.0f, 1.0f, 1.0f); // 白棋
+         glColor3f(1.0f, 1.0f, 1.0f); // white
      } else {
-         glColor3f(0.0f, 0.0f, 0.0f); // 黑棋
+         glColor3f(0.0f, 0.0f, 0.0f); // black
      }
 
 
