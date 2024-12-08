@@ -2,7 +2,7 @@
 
 ## Description
 
-La branche par défaut `dev_texture` contient la version la plus récente du projet. Malgré mes efforts récents, il ne s'agit pas encore d'un jeu d'échecs complet. Les résultats d'exécution ne sont pas totalement satisfaisants. Et cette version ne contient pas la programmation des règles du jeu. Les règles du jeu sont incluses dans la branche `2Dgame`.
+La branche par défaut `dev_texture` contient la version la plus récente du projet. Malgré mes efforts récents, il ne s'agit pas encore d'un jeu d'échecs complet en 3D. Les résultats d'exécution ne sont pas totalement satisfaisants. Et cette version ne contient pas la programmation des règles du jeu. Les règles du jeu sont incluses dans la branche `2Dgame`.
 
 ### Branches disponibles
 
